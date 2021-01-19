@@ -8,7 +8,7 @@ import org.springframework.boot.runApplication
 class TrelloApplication
 
 fun main(args: Array<String>) {
-	runApplication<TrelloApplication>(*args) {
-		webApplicationType = WebApplicationType.SERVLET
-	}
+    runApplication<TrelloApplication>(*args) {
+        webApplicationType = WebApplicationType.SERVLET
+    }
 }
