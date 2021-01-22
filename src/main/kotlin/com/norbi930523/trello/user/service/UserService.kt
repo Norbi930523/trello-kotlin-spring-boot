@@ -5,15 +5,16 @@ import com.norbi930523.trello.user.api.CreateUserResponse
 import com.norbi930523.trello.user.model.User
 import com.norbi930523.trello.user.model.UserRepository
 import com.norbi930523.trello.user.model.UserView
+import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
 
 @Service
-class UserService(val userRepository: UserRepository) {
+class UserService(val userRepository: UserRepository, val passwordEncoder: PasswordEncoder) {
 
     fun createUser(userData: CreateUserRequest): CreateUserResponse {
         val user = User()
         user.username = userData.username
-        user.password = userData.password
+        user.password = passwordEncoder.encode(userData.password)
 
         val createdUser = userRepository.save(user)
 
