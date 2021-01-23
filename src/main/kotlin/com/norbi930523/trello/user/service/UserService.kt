@@ -1,5 +1,6 @@
 package com.norbi930523.trello.user.service
 
+import com.norbi930523.trello.common.api.exception.AlreadyExistsException
 import com.norbi930523.trello.common.api.exception.NotFoundException
 import com.norbi930523.trello.common.api.exception.ValidationException
 import com.norbi930523.trello.common.validation.NotBlankValidator
@@ -10,6 +11,7 @@ import com.norbi930523.trello.user.api.CreateUserResponse
 import com.norbi930523.trello.user.model.User
 import com.norbi930523.trello.user.model.UserRepository
 import com.norbi930523.trello.user.model.UserView
+import org.springframework.dao.DataIntegrityViolationException
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
 
@@ -28,7 +30,11 @@ class UserService(val userRepository: UserRepository, val passwordEncoder: Passw
             password = passwordEncoder.encode(userData.password!!)
         }
 
-        val createdUser = userRepository.save(user)
+        val createdUser = try {
+            userRepository.save(user)
+        } catch (e: DataIntegrityViolationException) {
+            throw AlreadyExistsException("User already exists with username: ${user.username}");
+        }
 
         return CreateUserResponse(createdUser.id)
     }
