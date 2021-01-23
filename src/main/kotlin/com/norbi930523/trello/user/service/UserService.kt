@@ -23,9 +23,10 @@ class UserService(val userRepository: UserRepository, val passwordEncoder: Passw
             }
         }
 
-        val user = User()
-        user.username = userData.username!!
-        user.password = passwordEncoder.encode(userData.password!!)
+        val user = User().apply {
+            username = userData.username!!
+            password = passwordEncoder.encode(userData.password!!)
+        }
 
         val createdUser = userRepository.save(user)
 

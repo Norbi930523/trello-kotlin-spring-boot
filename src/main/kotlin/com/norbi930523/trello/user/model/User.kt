@@ -10,10 +10,10 @@ import javax.persistence.Table
 open class User : BaseEntity() {
 
     @Column(name = "USERNAME", nullable = false, unique = true)
-    open var username: String = ""
+    open lateinit var username: String
 
     @Column(name = "PASSWORD", nullable = false)
-    open var password: String = ""
+    open lateinit var password: String
 
 }
 

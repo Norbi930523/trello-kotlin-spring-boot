@@ -13,13 +13,16 @@ open class BaseEntity {
     @GeneratedValue(strategy = GenerationType.AUTO)
     open var id: Long = 0
 
-    @field:CreationTimestamp
+    @CreationTimestamp
+    @Column(name = "CREATED_AT")
     open var createdAt: Instant? = null
 
-    @field:UpdateTimestamp
+    @UpdateTimestamp
+    @Column(name = "UPDATED_AT")
     open var updatedAt: Instant? = null
 
     @Version
+    @Column(name = "VERSION")
     open var version: Long? = null
 
     override fun equals(other: Any?): Boolean {
