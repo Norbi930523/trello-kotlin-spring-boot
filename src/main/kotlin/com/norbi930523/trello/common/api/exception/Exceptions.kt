@@ -6,4 +6,6 @@ class NotFoundException(override val message: String?) : RuntimeException(messag
 
 class AlreadyExistsException(override val message: String?) : RuntimeException(message)
 
+class AuthenticationException(override val message: String?) : RuntimeException(message)
+
 class ValidationException(val errors: List<ValidationError>) : RuntimeException("Validation error")

@@ -8,6 +8,13 @@ A small project management API to practice Kotlin.
 
 ## Build and Run
 
+### Environment setup
+
+| Environment variable | Description |
+| -------------------- | ----------- |
+| `JWT_SECRET`         | Secret key for generating the JWT token's signature. |
+
+### Running the application
 In the project root:
 1. Execute `mvn clean package`
 2. Execute `mvn spring-boot:run` 
